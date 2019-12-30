@@ -43,6 +43,7 @@ export default class UserSignIn extends Component {
                 <input
                   id="username"
                   name="username"
+                  autoFocus
                   type="text"
                   value={username}
                   onChange={this.change}
