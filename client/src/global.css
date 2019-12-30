@@ -700,8 +700,13 @@ input:focus {
   outline: none;
 }
 /* line 522, ../sass/global.sass */
-.button:not(.button-secondary):hover {
-  background: #63537d;
+.button:not(.button-secondary):not(:disabled):hover {
+	background: #63537d;
+}
+
+.button:not(.button-secondary):disabled {
+  background-color: #b997ee;
+  ;
 }
 
 /* line 525, ../sass/global.sass */
