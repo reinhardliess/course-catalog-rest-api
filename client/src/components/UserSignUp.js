@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import { Link } from 'react-router-dom';
+
+import withContext from '../Context';
 import Form from './Form';
 
-export default class UserSignUp extends Component {
+/**
+ * User sign-up form component
+ */
+class UserSignUp extends Component {
   state = {
-    name: '',
-    username: '',
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
     password: '',
     passwordConfirm: '',
     errors: [],
   };
 
+  /**
+   * Handler for form input text fields
+   * @param {object} event - DOM event object
+   */
   change = (event) => {
     const { name, value } = event.target;
 
@@ -23,20 +31,52 @@ export default class UserSignUp extends Component {
     });
   };
 
-  submit = () => {};
+  /**
+   * Called when form is submitted
+   */
+  submit = async () => {
+    const { context, history } = this.props;
+    const { firstName, lastName, emailAddress, password } = this.state;
+    const user = { firstName, lastName, emailAddress, password };
+
+    const response = await context.api.createUser(user);
+    if (response === null) {
+      return;
+    }
+    if (response.created) {
+      console.log(
+        `${emailAddress} has successfully signed up and is authenticated!`
+      );
+      if (await context.actions.signIn(emailAddress, password)) {
+        history.push('/authenticated');
+      }
+    } else {
+      this.setState({ errors: response.errors });
+    }
+  };
 
   cancel = () => {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.history.push('/');
   };
 
+  /**
+   * Enables submit button only if password and passwordConfirm are identical
+   */
   handleSubmitEnabled = () => {
     const { password, passwordConfirm } = this.state;
     return password && password === passwordConfirm;
   };
 
   render() {
-    const { name, username, password, passwordConfirm, errors } = this.state;
+    const {
+      firstName,
+      lastName,
+      emailAddress,
+      password,
+      passwordConfirm,
+      errors,
+    } = this.state;
 
     return (
       <div className="bounds">
@@ -51,21 +91,29 @@ export default class UserSignUp extends Component {
             elements={() => (
               <>
                 <input
-                  id="name"
-                  name="name"
+                  id="firstName"
+                  name="firstName"
                   type="text"
-                  value={name}
+                  value={firstName}
                   autoFocus
                   onChange={this.change}
-                  placeholder="Name"
+                  placeholder="First Name"
                 />
                 <input
-                  id="username"
-                  name="username"
+                  id="lastName"
+                  name="lastName"
                   type="text"
-                  value={username}
+                  value={lastName}
                   onChange={this.change}
-                  placeholder="User Name"
+                  placeholder="Last Name"
+                />
+                <input
+                  id="emailAddress"
+                  name="emailAddress"
+                  type="text"
+                  value={emailAddress}
+                  onChange={this.change}
+                  placeholder="Email Address"
                 />
                 <input
                   id="password"
@@ -96,7 +144,4 @@ export default class UserSignUp extends Component {
   }
 }
 
-UserSignUp.propTypes = {
-  context: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-};
+export default withContext(UserSignUp);

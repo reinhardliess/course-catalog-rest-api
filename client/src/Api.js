@@ -4,6 +4,9 @@ import axios from 'axios';
 import config from './config';
 import { mapErrors } from './utils';
 
+/**
+ * Manages access to REST API
+ */
 export default class Api {
   /**
    * Executes api request using axios
@@ -31,6 +34,7 @@ export default class Api {
       const response = await axios(options);
       return response;
     } catch (error) {
+      // if http error let caller handle it
       if (error.response.status) {
         return error.response;
       } else {
@@ -100,8 +104,8 @@ export default class Api {
    * @param {number} status - HTTP status code
    */
   handleError(status) {
-    const errStatus = status || 500;
-    console.error('Unexpected error, HTTP status: %d', errStatus);
+    const errStatus = status || 'undefined';
+    console.error('Unexpected error, HTTP status: ', errStatus);
     // window.location.href = '/error';
   }
 }

@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ErrorsDisplay from './ErrorsDisplay';
 
+/**
+ * Basic form component used to sign in and sign up
+ * @param {object} props - React props
+ */
 const Form = (props) => {
   const {
     cancel,
