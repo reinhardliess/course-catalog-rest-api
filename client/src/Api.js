@@ -2,12 +2,32 @@
 /* eslint-disable class-methods-use-this */
 import axios from 'axios';
 import config from './config';
-import { mapErrors } from './utils';
 
 /**
  * Manages access to REST API
  */
 export default class Api {
+  /**
+   * Returns sorted string array of validation errors (User)
+   * @param {object[]} errors - validation errors
+   * @returns {string[]} errors
+   */
+  mapUserErrors(errors) {
+    // Sort errors to make sure their order matches the input field order of the sign-up form
+    const order = ['firstName', 'lastName', 'emailAddress', 'password'];
+    return [...errors]
+      .sort((a, b) => order.indexOf(a.path) - order.indexOf(b.path))
+      .map((error) => {
+        if (
+          error.type === 'unique violation' &&
+          error.path === 'emailAddress'
+        ) {
+          return 'A user with that email address already exists';
+        }
+        return error.message;
+      });
+  }
+
   /**
    * Executes api request using axios
    * @param {string} url
@@ -35,7 +55,7 @@ export default class Api {
       return response;
     } catch (error) {
       // if http error let caller handle it
-      if (error.response.status) {
+      if (error.response && error.response.status) {
         return error.response;
       } else {
         console.error(error);
@@ -62,11 +82,11 @@ export default class Api {
     let ret;
     if (response.status === 200) {
       ret = {
-        authenticated: true,
+        ok: true,
         data: response.data,
       };
     } else if (response.status === 401) {
-      ret = { authenticated: false };
+      ret = { ok: false };
     } else {
       this.handleError(response.status);
       ret = null;
@@ -86,11 +106,11 @@ export default class Api {
     }
     let ret;
     if (response.status === 201) {
-      ret = { created: true };
+      ret = { ok: true };
     } else if (response.status === 400) {
       ret = {
-        created: false,
-        errors: mapErrors(response.data.errors),
+        ok: false,
+        errors: this.mapUserErrors(response.data.errors),
       };
     } else {
       this.handleError(response.status);
@@ -106,6 +126,6 @@ export default class Api {
   handleError(status) {
     const errStatus = status || 'undefined';
     console.error('Unexpected error, HTTP status: ', errStatus);
-    // window.location.href = '/error';
+    window.location.href = '/error';
   }
 }

@@ -8,13 +8,13 @@ describe('user set', () => {
   test(`when using correct credentials expect user to be authenticated`, async () => {
     const api = new Api();
     const response = await api.getUser('joe@smith.com', 'joepassword');
-    expect(response).toHaveProperty('authenticated', true);
+    expect(response).toHaveProperty('ok', true);
   });
 
   test(`when using incorrect credentials expect user not to be authenticated`, async () => {
     const api = new Api();
     const response = await api.getUser('joe@smith.com', 'badpassword');
-    expect(response).toHaveProperty('authenticated', false);
+    expect(response).toHaveProperty('ok', false);
   });
 
   test(`when using complete data expect user to be created`, async () => {
@@ -26,7 +26,7 @@ describe('user set', () => {
       "password": "jaffacakes214"
     }
     const response = await api.createUser(user);
-    expect(response).toHaveProperty('created', true);
+    expect(response).toHaveProperty('ok', true);
   });
 
   test(`when using incomplete data expect user not to be created`, async () => {
@@ -36,7 +36,7 @@ describe('user set', () => {
     }
     const response = await api.createUser(user);
     console.log({response});
-    expect(response).toHaveProperty('created', false);
+    expect(response).toHaveProperty('ok', false);
     expect(response.errors).toHaveLength(3);
   });
 
@@ -50,7 +50,7 @@ describe('user set', () => {
     }
     const response = await api.createUser(user);
     console.log({response});
-    expect(response).toHaveProperty('created', false);
+    expect(response).toHaveProperty('ok', false);
     expect(response.errors).toHaveLength(1);
   });
 });
