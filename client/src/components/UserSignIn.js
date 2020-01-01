@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
+import withContext from '../Context';
 import Form from './Form';
 
-export default class UserSignIn extends Component {
+class UserSignIn extends Component {
   state = {
     username: '',
     password: '',
@@ -19,7 +21,24 @@ export default class UserSignIn extends Component {
     });
   };
 
-  submit = () => {};
+  submit = async () => {
+    const { context, history, location } = this.props;
+    const { username, password } = this.state;
+    const { from } = location.state || { from: { pathname: '/authenticated' } };
+
+    const signedIn = await context.actions.signIn(username, password);
+    if (signedIn === null) {
+      return;
+    }
+    if (signedIn) {
+      history.push(from);
+      console.log(`SUCCESS! ${username} is now signed in!`);
+    } else {
+      this.setState(() => ({
+        errors: ["Your email address and/or password don't match."],
+      }));
+    }
+  };
 
   cancel = () => {
     // eslint-disable-next-line react/destructuring-assignment
@@ -69,3 +88,5 @@ export default class UserSignIn extends Component {
     );
   }
 }
+
+export default withContext(UserSignIn);

@@ -43,12 +43,12 @@ class UserSignUp extends Component {
     if (response === null) {
       return;
     }
-    if (response.created) {
+    if (response.ok) {
       console.log(
         `${emailAddress} has successfully signed up and is authenticated!`
       );
       if (await context.actions.signIn(emailAddress, password)) {
-        history.push('/authenticated');
+        history.push('/');
       }
     } else {
       this.setState({ errors: response.errors });
