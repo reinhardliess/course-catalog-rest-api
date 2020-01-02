@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // components
 import Header from './components/Header';
+import Courses from './components/Courses';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
@@ -16,6 +17,7 @@ const App = () => (
     <div>
       <Header />
       <Switch>
+        <Route exact path="/" component={Courses} />
         <Route path="/signup" component={UserSignUp} />
         <Route path="/signin" component={UserSignIn} />
         <Route path="/signout" component={UserSignOut} />
@@ -39,7 +41,7 @@ const App = () => (
             </>
           )}
         />
-        {/* <Route
+        <Route
           render={() => (
             <>
               <Error heading="Not Found">
@@ -47,7 +49,7 @@ const App = () => (
               </Error>
             </>
           )}
-        /> */}
+        />
       </Switch>
     </div>
   </Router>
