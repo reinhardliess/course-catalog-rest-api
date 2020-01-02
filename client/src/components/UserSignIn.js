@@ -4,13 +4,20 @@ import { Link } from 'react-router-dom';
 import withContext from '../Context';
 import Form from './Form';
 
+/**
+ * User sign-in form component
+ */
 class UserSignIn extends Component {
   state = {
-    username: '',
+    email: '',
     password: '',
     errors: [],
   };
 
+  /**
+   * Handler for form input text fields
+   * @param {object} event - DOM event object
+   */
   change = (event) => {
     const { name, value } = event.target;
 
@@ -21,18 +28,21 @@ class UserSignIn extends Component {
     });
   };
 
+  /**
+   * Called when form is submitted
+   */
   submit = async () => {
     const { context, history, location } = this.props;
-    const { username, password } = this.state;
-    const { from } = location.state || { from: { pathname: '/authenticated' } };
+    const { email, password } = this.state;
+    const { from } = location.state || { from: { pathname: '/' } };
 
-    const signedIn = await context.actions.signIn(username, password);
+    const signedIn = await context.actions.signIn(email, password);
     if (signedIn === null) {
       return;
     }
     if (signedIn) {
       history.push(from);
-      console.log(`SUCCESS! ${username} is now signed in!`);
+      console.log(`SUCCESS! ${email} is now signed in!`);
     } else {
       this.setState(() => ({
         errors: ["Your email address and/or password don't match."],
@@ -45,8 +55,16 @@ class UserSignIn extends Component {
     this.props.history.push('/');
   };
 
+  /**
+   * Enables submit button only if email and password are filled out
+   */
+  handleSubmitEnabled = () => {
+    const { email, password } = this.state;
+    return email && password;
+  };
+
   render() {
-    const { username, password, errors } = this.state;
+    const { email, password, errors } = this.state;
 
     return (
       <div className="bounds">
@@ -57,16 +75,17 @@ class UserSignIn extends Component {
             errors={errors}
             submit={this.submit}
             submitButtonText="Sign In"
+            isSubmitEnabled={this.handleSubmitEnabled}
             elements={() => (
               <>
                 <input
-                  id="username"
-                  name="username"
+                  id="email"
+                  name="email"
                   autoFocus
                   type="text"
-                  value={username}
+                  value={email}
                   onChange={this.change}
-                  placeholder="User Name"
+                  placeholder="Email Address"
                 />
                 <input
                   id="password"
