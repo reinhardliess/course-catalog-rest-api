@@ -22,9 +22,9 @@ export default class Api {
           error.type === 'unique violation' &&
           error.path === 'emailAddress'
         ) {
-          return 'A user with that email address already exists';
+          error.message = 'A user with that email address already exists';
         }
-        return error.message;
+        return error;
       });
   }
 
@@ -35,26 +35,27 @@ export default class Api {
    * @param {object} options
    * @returns {object} response
    */
-  async exec(url, method = 'GET', { body, credentials = {} }) {
+  async exec(url, method = 'GET', options = {}) {
     axios.defaults.baseURL = config.apiBaseUrl;
+    const { body, credentials = {} } = options;
     const { username, password } = credentials;
-    const options = {
+    const axiosOptions = {
       url,
       method,
     };
 
     if (body) {
-      options.data = body;
+      axiosOptions.data = body;
     }
 
     if (username) {
-      options.auth = { username, password };
+      axiosOptions.auth = { username, password };
     }
     try {
-      const response = await axios(options);
+      const response = await axios(axiosOptions);
       return response;
     } catch (error) {
-      // if http error let caller handle it
+      // if http error, let caller handle it
       if (error.response && error.response.status) {
         return error.response;
       } else {
@@ -111,6 +112,34 @@ export default class Api {
       ret = {
         ok: false,
         errors: this.mapUserErrors(response.data.errors),
+      };
+    } else {
+      this.handleError(response.status);
+      ret = null;
+    }
+    return ret;
+  }
+
+  /**
+   * Retrieves all courses in the database
+   * @returns {object} response
+   */
+  async getAllCourses() {
+    const response = await this.exec(`/courses`, 'GET');
+    if (response === null) {
+      return null;
+    }
+
+    let ret;
+    if (response.status === 200) {
+      ret = {
+        ok: true,
+        data: response.data.courses,
+      };
+    } else if (response.status === 404) {
+      ret = {
+        ok: true,
+        data: [],
       };
     } else {
       this.handleError(response.status);

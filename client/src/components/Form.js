@@ -54,7 +54,13 @@ const Form = (props) => {
 
 Form.propTypes = {
   cancel: PropTypes.func.isRequired,
-  errors: PropTypes.arrayOf(PropTypes.string),
+  errors: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      path: PropTypes.string,
+      message: PropTypes.string,
+    })
+  ),
   submit: PropTypes.func.isRequired,
   isSubmitEnabled: PropTypes.func,
   submitButtonText: PropTypes.string.isRequired,

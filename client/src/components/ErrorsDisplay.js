@@ -10,9 +10,8 @@ const ErrorsDisplay = ({ errors }) => {
         <h2 className="validation--errors--label">Validation errors</h2>
         <div className="validation-errors">
           <ul>
-            {errors.map((error, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <li key={index}>{error}</li>
+            {errors.map((error) => (
+              <li key={`${error.type}${error.path}`}>{error.message}</li>
             ))}
           </ul>
         </div>
@@ -24,7 +23,13 @@ const ErrorsDisplay = ({ errors }) => {
 };
 
 ErrorsDisplay.propTypes = {
-  errors: PropTypes.arrayOf(PropTypes.string),
+  errors: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      path: PropTypes.string,
+      message: PropTypes.string,
+    })
+  ),
 };
 
 export default ErrorsDisplay;

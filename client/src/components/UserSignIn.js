@@ -45,7 +45,13 @@ class UserSignIn extends Component {
       console.log(`SUCCESS! ${email} is now signed in!`);
     } else {
       this.setState(() => ({
-        errors: ["Your email address and/or password don't match."],
+        errors: [
+          {
+            path: 'password',
+            type: 'Authentication Error',
+            message: "Your email address and/or password don't match.",
+          },
+        ],
       }));
     }
   };
