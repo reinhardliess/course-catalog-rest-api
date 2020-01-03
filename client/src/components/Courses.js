@@ -9,7 +9,7 @@ class Courses extends Component {
 
   async componentDidMount() {
     const { context } = this.props;
-    const response = await context.api.getAllCourses();
+    const response = await context.api.getCourses();
     if (response === null) {
       return;
     }

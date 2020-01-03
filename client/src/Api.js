@@ -121,11 +121,42 @@ export default class Api {
   }
 
   /**
+   * Retrieves one or all courses in the database
+   * @param {number?} id - course id
+   * @returns {object} response
+   */
+  async getCourses(id = null) {
+    const route = id ? `/courses/${id}` : '/courses';
+    const response = await this.exec(route, 'GET');
+    if (response === null) {
+      return null;
+    }
+
+    let ret;
+    if (response.status === 200) {
+      const { courses } = response.data;
+      ret = {
+        ok: true,
+        data: courses,
+      };
+    } else if (response.status === 404) {
+      ret = {
+        ok: true,
+        data: [],
+      };
+    } else {
+      this.handleError(response.status);
+      ret = null;
+    }
+    return ret;
+  }
+
+  /**
    * Retrieves all courses in the database
    * @returns {object} response
    */
-  async getAllCourses() {
-    const response = await this.exec(`/courses`, 'GET');
+  async getSingleCourse(id) {
+    const response = await this.exec(`/courses/${id}`, 'GET');
     if (response === null) {
       return null;
     }
