@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { withRouter } from 'react-router-dom';
 
 class Error extends Component {
@@ -25,5 +27,10 @@ class Error extends Component {
     );
   }
 }
+
+Error.propTypes = {
+  heading: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default withRouter(Error);
