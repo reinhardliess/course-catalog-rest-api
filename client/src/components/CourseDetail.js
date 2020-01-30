@@ -35,6 +35,56 @@ const ActionsBar = (props) => {
   );
 };
 
+/**
+ * Displays course description
+ * @param {object} props
+ */
+const CourseDescription = (props) => {
+  const { data } = props;
+  const { title, description, User } = data;
+  const { firstName, lastName } = User;
+  return (
+    <div className="grid-66">
+      <div className="course--header">
+        <h4 className="course--label">Course</h4>
+        <h3 className="course--title">{title}</h3>
+        <p>{`By ${firstName} ${lastName}`}</p>
+      </div>
+      <div className="course--description">
+        <ReactMarkdown source={description} />
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Displays materials needed for course
+ * @param {object} props
+ */
+const CourseMaterials = (props) => {
+  const { data } = props;
+  const { estimatedTime, materialsNeeded } = data;
+  return (
+    <div className="grid-25 grid-right">
+      <div className="course--stats">
+        <ul className="course--stats--list">
+          <li className="course--stats--list--item">
+            <h4>Estimated Time</h4>
+            <h3>{estimatedTime}</h3>
+          </li>
+          <li className="course--stats--list--item">
+            <h4>Materials Needed</h4>
+            <ReactMarkdown source={materialsNeeded} />
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Course Detail Container Component
+ */
 class CourseDetail extends Component {
   state = {
     course: null,
@@ -95,14 +145,21 @@ class CourseDetail extends Component {
 
   render() {
     const { course } = this.state;
-    const courseId = course ? course.id : 0;
     return (
       <div>
-        <ActionsBar
-          id={courseId}
-          isAuthorized={this.handleAuthorized}
-          handleDelete={this.handleDeleteCourse}
-        />
+        {course ? (
+          <>
+            <ActionsBar
+              id={course.id}
+              isAuthorized={this.handleAuthorized}
+              handleDelete={this.handleDeleteCourse}
+            />
+            <div className="bounds course--detail">
+              <CourseDescription data={course} />
+              <CourseMaterials data={course} />
+            </div>
+          </>
+        ) : null}
       </div>
     );
   }
