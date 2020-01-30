@@ -20,6 +20,7 @@ export class Provider extends Component {
       return null;
     }
     if (response.ok) {
+      response.data.password = password;
       this.setState(() => ({ authenticatedUser: response.data }));
       Cookies.set('authenticatedUser', JSON.stringify(response.data), {
         expires: 1,

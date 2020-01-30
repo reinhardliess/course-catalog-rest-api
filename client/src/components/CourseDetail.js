@@ -81,11 +81,11 @@ class CourseDetail extends Component {
       match: { params },
     } = this.props;
     const { authenticatedUser } = context;
-    const { username, password } = authenticatedUser;
+    const { emailAddress, password } = authenticatedUser;
 
     const response = await context.api.deleteCourse(
       params.courseId,
-      username,
+      emailAddress,
       password
     );
     if (response.ok) {
