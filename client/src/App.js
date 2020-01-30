@@ -42,11 +42,19 @@ const App = () => (
           )}
         />
         <Route
+          path="/notfound"
           render={() => (
             <>
               <Error heading="Not Found">
                 <p>Sorry! We couldn't find the page you were looking for.</p>
               </Error>
+            </>
+          )}
+        />
+        <Route
+          render={() => (
+            <>
+              <Redirect to="/notfound" />
             </>
           )}
         />
