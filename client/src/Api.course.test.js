@@ -17,4 +17,11 @@ describe('courses set', () => {
     expect(response.data).toHaveLength(1);
   });
 
+  test(`delete a single course`, async () => {
+    const api = new Api();
+    const response = await api.deleteCourse(1, 'joe@smith.com', 'joepassword');
+    expect(response).toHaveProperty('ok', true);
+  });
+
+
 });

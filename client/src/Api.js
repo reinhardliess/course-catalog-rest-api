@@ -151,26 +151,15 @@ export default class Api {
     return ret;
   }
 
-  /**
-   * Retrieves all courses in the database
-   * @returns {object} response
-   */
-  async getSingleCourse(id) {
-    const response = await this.exec(`/courses/${id}`, 'GET');
-    if (response === null) {
-      return null;
-    }
+  async deleteCourse(id, username, password) {
+    const response = await this.exec(`/courses/${id}`, 'DELETE', {
+      credentials: { username, password },
+    });
 
     let ret;
-    if (response.status === 200) {
+    if (response.status === 204) {
       ret = {
         ok: true,
-        data: response.data.courses,
-      };
-    } else if (response.status === 404) {
-      ret = {
-        ok: true,
-        data: [],
       };
     } else {
       this.handleError(response.status);
@@ -184,6 +173,7 @@ export default class Api {
    * @param {number} status - HTTP status code
    */
   handleError(status) {
+    // TODO: handle 401/404 => forbidden/notfound ?
     const errStatus = status || 'undefined';
     console.error('Unexpected error, HTTP status: ', errStatus);
     window.location.href = '/error';
