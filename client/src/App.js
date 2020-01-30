@@ -1,10 +1,16 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 
 // components
 import Header from './components/Header';
 import Courses from './components/Courses';
+import CourseDetail from './components/CourseDetail';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
@@ -21,6 +27,7 @@ const App = () => (
         <Route path="/signup" component={UserSignUp} />
         <Route path="/signin" component={UserSignIn} />
         <Route path="/signout" component={UserSignOut} />
+        <Route path="/courses/:courseId" component={CourseDetail} />
         <Route
           path="/forbidden"
           render={() => (
