@@ -169,6 +169,67 @@ export default class Api {
   }
 
   /**
+   * Creates new course
+   * @param {object} course
+   * @param {string} username
+   * @param {string} password
+   * @returns {object} response
+   */
+  async createCourse(course, username, password) {
+    const response = await this.exec('/courses', 'POST', {
+      body: course,
+      credentials: { username, password },
+    });
+    if (response === null) {
+      return null;
+    }
+    let ret;
+    if (response.status === 201) {
+      ret = { ok: true };
+    } else if (response.status === 400) {
+      ret = {
+        ok: false,
+        errors: response.data.errors,
+      };
+    } else {
+      this.handleError(response.status);
+      ret = null;
+    }
+    return ret;
+  }
+
+  /**
+   * Updates specific course
+   * @param {object} course
+   * @param {number} id
+   * @param {string} username
+   * @param {string} password
+   * @returns {object} response
+   */
+  async updateCourse(course, id, username, password) {
+    const response = await this.exec(`/courses/${id}`, 'PUT', {
+      body: course,
+      credentials: { username, password },
+    });
+    if (response === null) {
+      return null;
+    }
+    let ret;
+    if (response.status === 204) {
+      ret = { ok: true };
+    } else if (response.status === 400) {
+      ret = {
+        ok: false,
+        errors: response.data.errors,
+      };
+    } else {
+      this.handleError(response.status);
+      ret = null;
+    }
+    return ret;
+  }
+
+  /**
    * Handles unexpected errors
    * @param {number} status - HTTP status code
    */
