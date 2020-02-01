@@ -10,6 +10,7 @@ import {
 // components
 import Header from './components/Header';
 import Courses from './components/Courses';
+import CourseCreate from './components/CourseCreate';
 import CourseDetail from './components/CourseDetail';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
@@ -27,6 +28,7 @@ const App = () => (
         <Route path="/signup" component={UserSignUp} />
         <Route path="/signin" component={UserSignIn} />
         <Route path="/signout" component={UserSignOut} />
+        <Route path="/courses/create" component={CourseCreate} />
         <Route path="/courses/:courseId" component={CourseDetail} />
         <Route
           path="/forbidden"
