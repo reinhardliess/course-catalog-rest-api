@@ -6,6 +6,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 // components
 import Header from './components/Header';
@@ -28,7 +29,7 @@ const App = () => (
         <Route path="/signup" component={UserSignUp} />
         <Route path="/signin" component={UserSignIn} />
         <Route path="/signout" component={UserSignOut} />
-        <Route path="/courses/create" component={CourseCreate} />
+        <PrivateRoute path="/courses/create" component={CourseCreate} />
         <Route path="/courses/:courseId" component={CourseDetail} />
         <Route
           path="/forbidden"
