@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-indent */
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -12,6 +11,7 @@ import PrivateRoute from './PrivateRoute';
 import Header from './components/Header';
 import Courses from './components/Courses';
 import CourseCreate from './components/CourseCreate';
+import CourseUpdate from './components/CourseUpdate';
 import CourseDetail from './components/CourseDetail';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
@@ -30,6 +30,10 @@ const App = () => (
         <Route path="/signin" component={UserSignIn} />
         <Route path="/signout" component={UserSignOut} />
         <PrivateRoute path="/courses/create" component={CourseCreate} />
+        <PrivateRoute
+          path="/courses/:courseId/update"
+          component={CourseUpdate}
+        />
         <Route path="/courses/:courseId" component={CourseDetail} />
         <Route
           path="/forbidden"
