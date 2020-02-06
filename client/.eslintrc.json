@@ -10,8 +10,22 @@
     "no-unused-vars": [
       1,
       {
-        "ignoreSiblings": true,
         "argsIgnorePattern": "res|next|^err"
+      }
+    ],
+    "no-shadow": [
+      2,
+      {
+        "hoist": "all",
+        "allow": [
+          "resolve",
+          "reject",
+          "done",
+          "next",
+          "err",
+          "error",
+          "Component"
+        ]
       }
     ],
     "no-restricted-syntax": [
@@ -31,6 +45,18 @@
     "react/forbid-prop-types": 0,
     "react/state-in-constructor": 0,
     "jsx-a11y/no-autofocus": 0,
+    "react/prefer-stateless-function": 0,
+    "react/no-unescaped-entities": [
+      2,
+      {
+        "forbid": [
+          ">",
+          "}"
+        ]
+      }
+    ],
+    "react/jsx-curly-newline": 0,
+    "react/jsx-indent": 0,
     "react/jsx-filename-extension": [
       1,
       {
