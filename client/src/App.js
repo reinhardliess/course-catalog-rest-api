@@ -1,3 +1,9 @@
+/** ****************************************
+Treehouse Techdegree:
+FSJS project #10 - course catalog
+Reinhard Liess, 2020
+***************************************** */
+
 import React from 'react';
 import {
   BrowserRouter as Router,

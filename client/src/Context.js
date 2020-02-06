@@ -4,6 +4,9 @@ import Api from './Api';
 
 const Context = React.createContext();
 
+/**
+ * Context API class
+ */
 export class Provider extends Component {
   state = {
     authenticatedUser: Cookies.getJSON('authenticatedUser') || null,

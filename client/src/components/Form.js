@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ErrorsDisplay from './ErrorsDisplay';
 
 /**
- * Basic form component used to sign in and sign up
+ * Basic form component for sign-in/sign-up & create/update course
  * @param {object} props - React props
  */
 const Form = (props) => {

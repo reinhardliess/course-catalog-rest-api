@@ -1,8 +1,7 @@
 /* eslint-disable */
 import Api from './Api';
 
-// test('renders learn react link', () => {});
-
+// tests for user api access
 describe('user set', () => {
 
   test(`when using correct credentials expect user to be authenticated`, async () => {

@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Displays validation messages
+ * @param {object} props
+ */
 const ErrorsDisplay = ({ errors }) => {
   let errorsDisplay = null;
 

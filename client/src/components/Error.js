@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
 
+/**
+ * Generic error component
+ */
 class Error extends Component {
   handleButton = () => {
     // eslint-disable-next-line react/destructuring-assignment

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Api from './Api';
 
+// tests for course api access
 describe('courses set', () => {
 
   test(`expect to retrieve all courses from the database`, async () => {

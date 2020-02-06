@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-indent */
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 
 import withContext from '../Context';
@@ -20,7 +18,6 @@ class CourseCreate extends Component {
     description: '',
     estimatedTime: '',
     materialsNeeded: '',
-    userId: 0,
     errors: [],
   };
 
@@ -30,12 +27,7 @@ class CourseCreate extends Component {
    */
   change = (event) => {
     const { name, value } = event.target;
-
-    this.setState(() => {
-      return {
-        [name]: value,
-      };
-    });
+    this.setState({ [name]: value });
   };
 
   /**

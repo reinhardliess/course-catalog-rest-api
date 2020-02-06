@@ -1,10 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/jsx-curly-newline */
 
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Consumer } from './Context';
 
+/**
+ * A higher-order component that makes the component only accessible for authenticated users
+ * @param {class} Component - A React component.
+ * @returns {function} A higher-order component.
+ */
 export default ({ component: Component, ...rest }) => {
   return (
     <Consumer>

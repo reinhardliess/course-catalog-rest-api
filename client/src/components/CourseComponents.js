@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-indent */
-/* eslint-disable import/prefer-default-export */
 import React from 'react';
 
 /**
- * Edit Title Component
+ * Edit Course Title Component
  * @param {object} props
  */
 const CourseEditTitle = ({ username, value, handleChange }) => {
@@ -12,6 +10,7 @@ const CourseEditTitle = ({ username, value, handleChange }) => {
       <h4 className="course--label">Course</h4>
       <div>
         <input
+          autoFocus
           id="title"
           name="title"
           type="text"
@@ -26,6 +25,10 @@ const CourseEditTitle = ({ username, value, handleChange }) => {
   );
 };
 
+/**
+ * Edit Course Description Component
+ * @param {object} props
+ */
 const CourseEditDescription = ({ value, handleChange }) => {
   return (
     <div className="course--description">
@@ -42,6 +45,10 @@ const CourseEditDescription = ({ value, handleChange }) => {
   );
 };
 
+/**
+ * Edit Course Estimated Time Component
+ * @param {object} props
+ */
 const CourseEstimatedTime = ({ value, handleChange }) => {
   return (
     <li className="course--stats--list--item">
@@ -61,6 +68,10 @@ const CourseEstimatedTime = ({ value, handleChange }) => {
   );
 };
 
+/**
+ * Edit Course Materials Component
+ * @param {object} props
+ */
 const CourseMaterials = ({ value, handleChange }) => {
   return (
     <li className="course--stats--list--item">

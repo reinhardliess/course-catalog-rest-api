@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
@@ -8,8 +7,7 @@ import withContext from '../Context';
  * Action Bar Button Component
  * @param {object} props
  */
-const ActionsBar = (props) => {
-  const { id, handleDelete, isAuthorized } = props;
+const ActionsBar = ({ id, handleDelete, isAuthorized }) => {
   return (
     <div className="actions--bar">
       <div className="bounds">
@@ -39,8 +37,7 @@ const ActionsBar = (props) => {
  * Displays course description
  * @param {object} props
  */
-const CourseDescription = (props) => {
-  const { data } = props;
+const CourseDescription = ({ data }) => {
   const { title, description, User } = data;
   const { firstName, lastName } = User;
   return (
@@ -61,8 +58,7 @@ const CourseDescription = (props) => {
  * Displays materials needed for course
  * @param {object} props
  */
-const CourseMaterials = (props) => {
-  const { data } = props;
+const CourseMaterials = ({ data }) => {
   const { estimatedTime, materialsNeeded } = data;
   return (
     <div className="grid-25 grid-right">
