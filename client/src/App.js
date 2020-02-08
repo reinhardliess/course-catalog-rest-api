@@ -22,7 +22,7 @@ import CourseDetail from './components/CourseDetail';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
-import Error from './components/Error';
+import Error from './components/UnhandledError';
 
 import './global.css';
 
