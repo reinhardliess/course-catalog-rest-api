@@ -36,8 +36,28 @@ class UserSignUp extends Component {
    */
   submit = async () => {
     const { context, history } = this.props;
-    const { firstName, lastName, emailAddress, password } = this.state;
+    const {
+      firstName,
+      lastName,
+      emailAddress,
+      password,
+      passwordConfirm,
+    } = this.state;
     const user = { firstName, lastName, emailAddress, password };
+
+    const passwordMatchOk = password && password === passwordConfirm;
+    if (!passwordMatchOk) {
+      this.setState(() => ({
+        errors: [
+          {
+            path: 'password',
+            type: 'Error',
+            message: "Password confirmation doesn't match password",
+          },
+        ],
+      }));
+      return;
+    }
 
     const response = await context.api.createUser(user);
     if (response === null) {
@@ -64,8 +84,9 @@ class UserSignUp extends Component {
    * Enables submit button only if password and passwordConfirm are identical
    */
   handleSubmitEnabled = () => {
-    const { password, passwordConfirm } = this.state;
-    return password && password === passwordConfirm;
+    const { password } = this.state;
+
+    return password;
   };
 
   render() {
