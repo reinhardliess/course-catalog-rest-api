@@ -4,7 +4,7 @@
 
 For this project, I used the popular library React to create a client app for a REST API I created using Express which can be found [here](https://github.com/rliess/rest-api-school). It's included in this project as a git submodule.
 
-*Course Catalog* a full-stack app that provides a way for users to administer a school database containing information about courses: users can interact with the database by retrieving a list of courses, viewing detail for a specific course, as well as creating, updating and deleting courses in the database.
+*Course Catalog* a full-stack app that provides a way for users to administer a school database containing information about courses: users can interact with the database by retrieving a list of courses, viewing details for a specific course, as well as creating, updating and deleting courses in the database.
 In addition, the project will require users to create an account and sign in to make changes to the database.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
