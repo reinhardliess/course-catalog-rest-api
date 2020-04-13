@@ -9,7 +9,7 @@ In addition, the project will require users to create an account and sign in to 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-A live version of this project can be found [here](https://rliess-course-catalog.netlify.com/). (Please note that the REST API might be in hibernation mode and it may take the app a couple of seconds to load the list of courses.)
+A live version of this project can be found [here](https://rliess-course-catalog.netlify.app/). (Please note that the REST API might be in hibernation mode and it may take the app a couple of seconds to load the list of courses.)
 
 ## Technologies Used
 
