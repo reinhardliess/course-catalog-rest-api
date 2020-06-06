@@ -25,7 +25,7 @@ A live version of this project can be found [here](https://rliess-course-catalog
 
 ## Installation
 
-- Download or clone from Github with the `--recurse-submodules` flag
+- Clone from Github with the `--recurse-submodules` flag
 - Run `npm install` in `./api` folder
 - Run `npm run seed` to seed the database
 - Run `npm start` to start the REST API server
