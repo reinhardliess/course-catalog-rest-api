@@ -1,3 +1,3 @@
 [submodule "api"]
 	path = api
-	url = https://github.com/rliess/rest-api-school.git
+	url = https://github.com/reinhardliess/rest-api-school.git
